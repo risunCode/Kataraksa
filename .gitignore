@@ -46,6 +46,13 @@ $RECYCLE.BIN/
 Vagrantfile
 
 #-------------------------
+# Uploads (user generated content)
+#-------------------------
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/index.html
+
+#-------------------------
 # Temporary Files
 #-------------------------
 writable/cache/*
@@ -124,3 +131,12 @@ _modules/*
 
 /results/
 /phpunit*.xml
+
+
+#-------------------------
+# Project Specific
+#-------------------------
+temps/
+public/null/
+*.sql
+CHAT_SESSION_SUMMARY.md

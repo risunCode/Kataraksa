@@ -12,6 +12,11 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\AuthFilter;
+use App\Filters\RoleFilter;
+use App\Filters\SecurityFilter;
+use App\Filters\RateLimitFilter;
+use App\Filters\MemberFilter;
 
 class Filters extends BaseFilters
 {
@@ -34,6 +39,11 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'auth'          => AuthFilter::class,
+        'role'          => RoleFilter::class,
+        'security'      => SecurityFilter::class,
+        'ratelimit'     => RateLimitFilter::class,
+        'member'        => MemberFilter::class,
     ];
 
     /**
@@ -72,11 +82,14 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'security',     // XSS, SQL Injection, Script blocking
+            'ratelimit',    // Rate limiting & brute force prevention
+            'invalidchars', // Invalid character filtering
+            // 'csrf',      // Enable in production
+            // 'honeypot',  // Enable in production
         ],
         'after' => [
+            'security',     // Add security headers
             // 'honeypot',
             // 'secureheaders',
         ],
